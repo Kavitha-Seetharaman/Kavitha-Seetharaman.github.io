@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kavitha Seetharaman | Data Analyst</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy:    #1a3a5c;
+      --mid:     #2d6a9f;
+      --accent:  #1a7fc1;
+      --light:   #e8f3fb;
+      --text:    #1e2d3d;
+      --muted:   #5a7a96;
+      --bg:      #f7fafd;
+      --white:   #ffffff;
+      --border:  #d0e4f0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(247,250,253,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    nav .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem; color: var(--navy); letter-spacing: 0.01em;
+    }
+    nav ul { list-style: none; display: flex; gap: 32px; }
+    nav ul a {
+      text-decoration: none; color: var(--muted);
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.03em;
+      text-transform: uppercase; transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 120px 48px 80px;
+      background: linear-gradient(135deg, var(--navy) 0%, #1e4d7b 60%, #2d6a9f 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -50%; right: -10%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-inner { max-width: 900px; position: relative; z-index: 1; }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 6px 16px; border-radius: 20px;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      color: var(--white); line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: rgba(255,255,255,0.55); }
+    .hero-sub {
+      font-size: 1.05rem; color: rgba(255,255,255,0.72);
+      max-width: 620px; margin-bottom: 36px; line-height: 1.75;
+    }
+    .hero-skills {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px;
+    }
+    .hero-skill {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.88);
+      font-size: 0.82rem; padding: 6px 14px; border-radius: 6px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--white); color: var(--navy);
+      padding: 12px 28px; border-radius: 8px;
+      text-decoration: none; font-weight: 600; font-size: 0.9rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.35); color: var(--white);
+      padding: 12px 28px; border-radius: 8px;
+      text-decoration: none; font-weight: 500; font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); }
+
+    /* SECTIONS */
+    section { padding: 88px 48px; max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: var(--navy); margin-bottom: 48px; line-height: 1.2;
+    }
+
+    /* STATS BAR */
+    .stats-bar {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      padding: 32px; gap: 24px;
+      margin: -40px 48px 0; position: relative; z-index: 10;
+      box-shadow: 0 4px 24px rgba(26,58,92,0.08);
+    }
+    .stat { text-align: center; }
+    .stat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem; color: var(--navy); display: block;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
+    }
+    .about-text p { color: #3d5a72; line-height: 1.85; margin-bottom: 18px; font-size: 0.97rem; }
+    .about-text strong { color: var(--navy); }
+    .timeline { border-left: 2px solid var(--border); padding-left: 24px; }
+    .tl-item { margin-bottom: 28px; position: relative; }
+    .tl-item::before {
+      content: ''; position: absolute; left: -30px; top: 5px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--white);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .tl-role { font-weight: 600; font-size: 0.92rem; color: var(--navy); }
+    .tl-company { font-size: 0.82rem; color: var(--accent); margin: 2px 0; }
+    .tl-date { font-size: 0.78rem; color: var(--muted); }
+    .tl-desc { font-size: 0.84rem; color: #4a6a82; margin-top: 6px; line-height: 1.6; }
+
+    /* SKILLS */
+    .skills-section { background: var(--white); border-radius: 20px; padding: 48px; border: 1px solid var(--border); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .skill-group h4 { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tag {
+      background: var(--light); color: var(--navy);
+      font-size: 0.82rem; padding: 5px 12px; border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .project-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: flex; flex-direction: column;
+    }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,58,92,0.12); }
+    .project-card.featured { border-color: var(--accent); border-width: 2px; }
+    .project-header {
+      padding: 28px 28px 20px;
+      background: linear-gradient(135deg, var(--light) 0%, var(--white) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    .project-badge {
+      display: inline-block; font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      background: var(--accent); color: var(--white);
+      padding: 3px 10px; border-radius: 4px; margin-bottom: 10px;
+    }
+    .project-card h3 { font-size: 1.05rem; color: var(--navy); font-weight: 600; line-height: 1.3; }
+    .project-body { padding: 20px 28px 24px; flex: 1; display: flex; flex-direction: column; }
+    .project-body p { font-size: 0.87rem; color: #4a6a82; line-height: 1.7; margin-bottom: 16px; }
+    .project-insight {
+      background: var(--light); border-left: 3px solid var(--accent);
+      padding: 10px 14px; border-radius: 0 8px 8px 0;
+      font-size: 0.82rem; color: var(--navy); margin-bottom: 18px;
+      font-style: italic;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .project-tag {
+      background: var(--light); color: var(--mid);
+      font-size: 0.75rem; padding: 3px 10px; border-radius: 4px;
+    }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--accent); font-size: 0.84rem; font-weight: 500;
+      text-decoration: none; margin-top: auto;
+      transition: gap 0.2s;
+    }
+    .project-link:hover { gap: 10px; }
+
+    /* CERTIFICATIONS */
+    .cert-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px 28px;
+      display: flex; align-items: center; gap: 20px;
+      max-width: 480px;
+    }
+    .cert-icon { font-size: 2.2rem; }
+    .cert-name { font-weight: 600; color: var(--navy); font-size: 0.97rem; }
+    .cert-issuer { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+
+    /* CONTACT */
+    .contact-section {
+      background: linear-gradient(135deg, var(--navy) 0%, #2d6a9f 100%);
+      border-radius: 20px; padding: 56px; text-align: center;
+    }
+    .contact-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem; color: var(--white); margin-bottom: 12px;
+    }
+    .contact-section p { color: rgba(255,255,255,0.7); margin-bottom: 36px; font-size: 0.95rem; }
+    .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .contact-link {
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+      color: var(--white); padding: 12px 24px; border-radius: 8px;
+      text-decoration: none; font-size: 0.88rem; font-weight: 500;
+      transition: background 0.2s;
+    }
+    .contact-link:hover { background: rgba(255,255,255,0.2); }
+
+    footer {
+      text-align: center; padding: 32px;
+      font-size: 0.82rem; color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      nav ul { gap: 16px; }
+      .hero { padding: 100px 20px 60px; }
+      section { padding: 60px 20px; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); margin: -20px 20px 0; }
+      .about-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .contact-section { padding: 36px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Kavitha Seetharaman</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Open to Work · Chennai, India</div>
+    <h1>Data Analyst<br><span>turning data into</span><br>decisions.</h1>
+    <p class="hero-sub">
+      10+ years in technology across software delivery, system analysis, and data management — with 2+ years of professional Power BI analytics across banking, insurance, and retail. PL-300 certified. Based in Chennai.
+    </p>
+    <div class="hero-skills">
+      <span class="hero-skill">Power BI</span>
+      <span class="hero-skill">DAX</span>
+      <span class="hero-skill">SQL</span>
+      <span class="hero-skill">Star Schema</span>
+      <span class="hero-skill">Python</span>
+      <span class="hero-skill">Tableau</span>
+      <span class="hero-skill">PL-300 Certified</span>
+    </div>
+    <div class="hero-actions">
+      <a href="Kavitha_Seetharaman_Data_Analyst.pdf" target="_blank" class="btn-primary">📄 Download Resume</a>
+      <a href="https://www.linkedin.com/in/kavithaseetharaman" target="_blank" class="btn-outline">LinkedIn</a>
+      <a href="https://github.com/Kavitha-Seetharaman" target="_blank" class="btn-outline">GitHub</a>
+      <a href="https://public.tableau.com/app/profile/kavitha.seetharaman" target="_blank" class="btn-outline">Tableau Public</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat">
+    <span class="stat-number">10+</span>
+    <div class="stat-label">Years in Technology</div>
+  </div>
+  <div class="stat">
+    <span class="stat-number">2+</span>
+    <div class="stat-label">Years Power BI Delivery</div>
+  </div>
+  <div class="stat">
+    <span class="stat-number">PL-300</span>
+    <div class="stat-label">Microsoft Certified</div>
+  </div>
+  <div class="stat">
+    <span class="stat-number">5</span>
+    <div class="stat-label">Projects on GitHub</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Background</div>
+  <div class="section-title">10+ years in tech. 2+ years in analytics.</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>10+ years in technology across software delivery, system analysis, and data management — with <strong>2+ years of professional Power BI analytics delivery</strong> across banking, insurance, and retail domains.</p>
+      <p>Proficient in <strong>advanced SQL, Power BI (DAX, Power Query, Star Schema)</strong>, and Excel. Working knowledge of Python and Tableau. PL-300 certified.</p>
+      <p>Consistent track record of converting business requirements into KPI dashboards, SLA reports, and actionable insights that stakeholders rely on for decisions.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-role">Power BI Analyst (Contract)</div>
+        <div class="tl-company">United Techno, Chennai</div>
+        <div class="tl-date">08/2024 – 12/2025</div>
+        <div class="tl-desc">Power BI dashboards, DAX measures, KPI/SLA reporting, UAT validation</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-role">Technical Lead</div>
+        <div class="tl-company">United Techno, Chennai</div>
+        <div class="tl-date">10/2022 – 10/2023</div>
+        <div class="tl-desc">AS400/DB2 data systems, SQL optimization, self-initiated Power BI transition</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-role">Senior Associate</div>
+        <div class="tl-company">Cognizant, Chennai</div>
+        <div class="tl-date">09/2018 – 03/2019</div>
+        <div class="tl-desc">High-volume transactional data analysis, SQL optimization 15–20%</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-role">System Analyst</div>
+        <div class="tl-company">UST, Chennai</div>
+        <div class="tl-date">12/2016 – 09/2018</div>
+        <div class="tl-desc">End-to-end SDLC on AS400/SQL for banking and insurance</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-role">Senior Software Engineer</div>
+        <div class="tl-company">HCL Technologies, Chennai</div>
+        <div class="tl-date">06/2014 – 12/2016</div>
+        <div class="tl-desc">AS400 development, Excel dashboards for insurance performance reporting</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="padding-top: 0;">
+  <div class="section-label">Capabilities</div>
+  <div class="section-title">What I work with.</div>
+  <div class="skills-section">
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>SQL</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Joins & Aggregations</span>
+          <span class="skill-tag">CTEs</span>
+          <span class="skill-tag">Window Functions</span>
+          <span class="skill-tag">Query Optimization</span>
+          <span class="skill-tag">SQL Server</span>
+          <span class="skill-tag">DB2 / AS400</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Power BI</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">DAX</span>
+          <span class="skill-tag">Power Query</span>
+          <span class="skill-tag">Star Schema</span>
+          <span class="skill-tag">KPI Reporting</span>
+          <span class="skill-tag">RLS</span>
+          <span class="skill-tag">SLA Dashboards</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Analytics</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">EDA</span>
+          <span class="skill-tag">Data Cleaning</span>
+          <span class="skill-tag">Trend Analysis</span>
+          <span class="skill-tag">Customer Segmentation</span>
+          <span class="skill-tag">UAT & Validation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Tools</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Excel (Advanced)</span>
+          <span class="skill-tag">Tableau (Tableau Public)</span>
+          <span class="skill-tag">Python (Pandas)</span>
+          <span class="skill-tag">ServiceNow</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Data Engineering</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">ETL Concepts</span>
+          <span class="skill-tag">Data Warehousing</span>
+          <span class="skill-tag">Azure Basics</span>
+          <span class="skill-tag">Data Governance</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Soft Skills</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Stakeholder Communication</span>
+          <span class="skill-tag">Analytical Thinking</span>
+          <span class="skill-tag">Adaptability</span>
+          <span class="skill-tag">Attention to Detail</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Portfolio</div>
+  <div class="section-title">Projects that show the thinking.</div>
+  <div class="projects-grid">
+
+    <div class="project-card featured">
+      <div class="project-header">
+        <div class="project-badge">⭐ Featured</div>
+        <h3>Online Retail Store — 4-Page Analysis Dashboard</h3>
+      </div>
+      <div class="project-body">
+        <p>Comprehensive 4-page Power BI dashboard analyzing $2.30M in retail sales. Uses scatter plot quadrant analysis to identify margin-destroying products, maps regional profit efficiency, and tracks customer acquisition vs retention trends.</p>
+        <div class="project-insight">"11 high-revenue, low-margin products identified — Supplies sub-category running at -$1,187 profit despite active sales."</div>
+        <div class="project-tags">
+          <span class="project-tag">Power BI</span>
+          <span class="project-tag">DAX</span>
+          <span class="project-tag">SQL</span>
+          <span class="project-tag">Quadrant Analysis</span>
+          <span class="project-tag">Customer Segmentation</span>
+        </div>
+        <a href="https://github.com/Kavitha-Seetharaman/Online-RetailStore-Analysis" target="_blank" class="project-link">GitHub →</a>
+        <a href="https://public.tableau.com/app/profile/kavitha.seetharaman/viz/Online-Retail-Store-Sales-Profitability-Analysis/Dashboard1" target="_blank" class="project-link" style="margin-left:16px;">Tableau Public →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <h3>Walmart Retail Sales — Crisis Impact Dashboard</h3>
+      </div>
+      <div class="project-body">
+        <p>Classifies 45 Walmart stores into risk tiers (Stable / Moderate / High Risk) based on sales performance. Correlates economic stress factors — CPI, fuel price, temperature — with store-level performance. Includes written crisis summary and recommended actions.</p>
+        <div class="project-insight">"68.89% Stable, 26.67% Moderate Risk, 4.44% High Risk — economic correlation with CPI and fuel price confirmed."</div>
+        <div class="project-tags">
+          <span class="project-tag">Power BI</span>
+          <span class="project-tag">DAX</span>
+          <span class="project-tag">SQL</span>
+          <span class="project-tag">Risk Classification</span>
+          <span class="project-tag">Economic Analysis</span>
+        </div>
+        <a href="https://github.com/Kavitha-Seetharaman/Walmart---Retail-Sales-Dashboard" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <h3>Customer Churn Analysis</h3>
+      </div>
+      <div class="project-body">
+        <p>Two-stage analytical workflow: Python (Pandas) for EDA and data cleaning, then Power BI for interactive churn dashboard. Identifies key churn drivers including service call frequency and contract type patterns.</p>
+        <div class="project-insight">"Customers with 4+ service calls churn at significantly higher rates — actionable trigger for proactive retention."</div>
+        <div class="project-tags">
+          <span class="project-tag">Power BI</span>
+          <span class="project-tag">Python</span>
+          <span class="project-tag">DAX</span>
+          <span class="project-tag">EDA</span>
+        </div>
+        <a href="https://github.com/Kavitha-Seetharaman/Customer-churn-analysis-powerbi" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <h3>Retail Sales & Customer Analytics</h3>
+      </div>
+      <div class="project-body">
+        <p>End-to-end Power BI dashboard on AdventureWorks retail data. Implements star schema modeling, Row Level Security, custom tooltips, and 6+ complex SQL queries for regional performance, customer frequency, and seasonal demand analysis.</p>
+        <div class="project-insight">"RLS implemented with USERPRINCIPALNAME() — data access secured by territory at report level."</div>
+        <div class="project-tags">
+          <span class="project-tag">Power BI</span>
+          <span class="project-tag">DAX</span>
+          <span class="project-tag">SQL</span>
+          <span class="project-tag">RLS</span>
+          <span class="project-tag">Star Schema</span>
+        </div>
+        <a href="https://github.com/Kavitha-Seetharaman/Retail-Sales-PowerBI-Dashboard" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section style="padding-top: 0;">
+  <div class="section-label">Certifications</div>
+  <div class="section-title">Validated expertise.</div>
+  <div class="cert-card">
+    <div class="cert-icon">🏅</div>
+    <div>
+      <div class="cert-name">Microsoft PL-300</div>
+      <div class="cert-issuer">Power BI Data Analyst Associate — Microsoft</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-section">
+    <h2>Let's connect.</h2>
+    <p>Open to Data Analyst, Power BI Analyst, and Business Intelligence roles in Chennai.</p>
+    <div class="contact-links">
+      <a href="mailto:kavi.sahha@gmail.com" class="contact-link">📧 kavi.sahha@gmail.com</a>
+      <a href="https://www.linkedin.com/in/kavithaseetharaman" target="_blank" class="contact-link">LinkedIn</a>
+      <a href="https://github.com/Kavitha-Seetharaman" target="_blank" class="contact-link">GitHub</a>
+      <a href="https://public.tableau.com/app/profile/kavitha.seetharaman" target="_blank" class="contact-link">Tableau Public</a>
+      <a href="Kavitha_Seetharaman_Data_Analyst.pdf" target="_blank" class="contact-link">📄 Resume</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Kavitha Seetharaman &nbsp;•&nbsp; Chennai, India &nbsp;•&nbsp; Data Analyst
+</footer>
+
+</body>
+</html>
